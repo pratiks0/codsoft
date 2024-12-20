@@ -44,6 +44,16 @@
             overflow-y: auto;
         }
 
+        .memory {
+            background: #f3f3f3;
+            color: #444;
+            text-align: center;
+            font-size: 1rem;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -78,7 +88,7 @@
         .button.equal {
             background: #ff6f61;
             color: #fff;
-            grid-column: span 2;
+            grid-row: 4/ span 2;
         }
 
         .button.equal:hover {
@@ -115,6 +125,8 @@
     <script>
         const display = document.getElementById('display');
         const history = document.getElementById('history');
+        const memory = document.getElementById('memory');
+        let memoryValue = null;
 
         function appendNumber(number) {
             if (display.innerText === '0') {
@@ -148,6 +160,22 @@
             } catch {
                 display.innerText = 'Error';
             }
+        }
+
+        function storeToMemory() {
+            memoryValue = display.innerText;
+            memory.innerText = `Memory: ${memoryValue}`;
+        }
+
+        function recallMemory() {
+            if (memoryValue !== null) {
+                display.innerText += memoryValue;
+            }
+        }
+
+        function clearMemory() {
+            memoryValue = null;
+            memory.innerText = 'Memory: Not Used';
         }
     </script>
 </body>
